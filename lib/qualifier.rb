@@ -1,4 +1,3 @@
-require 'HTTParty'
 require 'Nokogiri'
 require 'JSON'
 require 'csv'
@@ -32,7 +31,7 @@ end
 end
 
 def qualify_user_sites
-@num = 1 
+@num = 1
 @user_sites.each do |site|
 @site = instance_variable_set("@site_#{@num}", Hash.new)
 begin
@@ -59,7 +58,7 @@ end
    puts @qualification
    @num += 1
    end
-  
+
 end
 @qualification
 end
@@ -168,14 +167,14 @@ def built_with
   end
 end
 
-  def fit 
+  def fit
     if  @site['user_system']==true && @site['built_with'].nil?
-    @site['fit']='good' 
-    elsif 
+    @site['fit']='good'
+    elsif
     @site['user_system']==true && @site['built_with']=='wordpress'
     @site['fit']='potentially good'
     elsif
-     @site['user_system']==false 
+     @site['user_system']==false
      @site['fit']='bad'
     elsif @site['built_with'] && @site['built_with'] != 'wordress'
     @site['fit']='bad'

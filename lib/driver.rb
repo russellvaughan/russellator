@@ -1,4 +1,4 @@
-require 'watir'
+require 'mysql'
 
 class Driver
 

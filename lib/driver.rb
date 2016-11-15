@@ -2,24 +2,21 @@ require 'watir'
 require 'phantomjs'
 require 'Nokogiri'
 
-class Driver 
+class Driver
 
 attr_reader :sites
 
 def initialize(url)
 @url = url
 @sites = []
-end 
+end
 
 def find_sites
-browser = Watir::Browser.new(:phantomjs)
-browser.goto(@url)
-document = Nokogiri::HTML.parse(browser.html)
-if document.css('.caption')
-document.css('.caption').each do |n|
-@sites << n.search('h4').text
-end
-else puts 'no caption id present'
+con = Mysql.new ENV["MYSQL_SERVER"], ENV["MYSQL_USER"], ENV["MYSQL_CREDS"], ENV["MYSQL_DB"]
+rs = con.query("select s.url from users u join sites s on (u.id = s.owner_id) where u.id = #{@url} order by u.id desc limit 10;")
+n_rows = rs.num_rows
+n_rows.times do
+@sites << rs.fetch_row.join("\s")
 end
 @sites
 end

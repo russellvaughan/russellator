@@ -1,0 +1,28 @@
+<br>
+<center>
+<%= form_tag("/search", method: "post") do %>
+  <%= label_tag(:q, "Search for:") %>
+  <%= text_field_tag(:q) %>
+  <%= submit_tag("Search") %>
+<% end %>
+</center>
+
+<br>
+
+<div>
+<%if @params %>
+<center>
+<h1> Results </h1>
+<% session[:response].each do |site|  %>
+	
+	Site Address: <%= site[1]['url'] %> <br>
+	User System: <%= site[1]["user_system"] %> <br>
+	<% if site[1]['analytics'] %>
+	Anayltics Used:
+	 <%= site[1]['analytics'].join(", ") %>	 	
+	<%end%>  <br>
+	Site Fit: <%= site[1]['fit'] %> <br>
+	<%end%>
+</center>
+<%end%> 
+</div>

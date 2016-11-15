@@ -1,6 +1,4 @@
 require 'watir'
-require 'phantomjs'
-require 'Nokogiri'
 
 class Driver
 

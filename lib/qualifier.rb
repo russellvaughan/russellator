@@ -1,4 +1,3 @@
-require 'Nokogiri'
 require 'JSON'
 require 'csv'
 require './lib/driver'

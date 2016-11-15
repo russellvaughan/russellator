@@ -1,5 +1,3 @@
-require 'JSON'
-require 'csv'
 require './lib/driver'
 
 class Qualifier

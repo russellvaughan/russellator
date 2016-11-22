@@ -30,6 +30,7 @@ end
 def qualify_user_sites
 @num = 1
 @user_sites.each do |site|
+puts "this is the site #{site}"
 @site = instance_variable_set("@site_#{@num}", Hash.new)
 begin
   response = HTTParty.get(site)
@@ -159,22 +160,19 @@ def built_with
   end
     if string.include?('tumblr')
     print "This site is built with Rapidweaver\n"
-    @site['built_with']='Rapidweaver'
+    @site['built_with']='tumblr'
     @badfit = true
   end
 end
 
   def fit
     if  @site['user_system']==true && @site['built_with'].nil?
-    @site['fit']='good'
+    @site['fit']='People, Analytics and Chat'
     elsif
-    @site['user_system']==true && @site['built_with']=='wordpress'
-    @site['fit']='potentially good'
-    elsif
-     @site['user_system']==false
-     @site['fit']='bad'
-    elsif @site['built_with'] && @site['built_with'] != 'wordress'
-    @site['fit']='bad'
+    @site['user_system']== true && @site['built_with'] == 'Wordpress'
+    @site['fit']='People, Analytics and Chat'
+    else
+    @site['fit']='Analytics & Chat only'
   end
 end
 

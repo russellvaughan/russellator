@@ -1,28 +1,47 @@
+<center>
+<h1> The Russellator </h1>
+<%= image_tag("russellator.jpg", height: '300', width: '250') %>
+</center>
+
 <br>
+
+
 <center>
 <%= form_tag("/search", method: "post") do %>
-  <%= label_tag(:q, "Search for:") %>
-  <%= text_field_tag(:q) %>
-  <%= submit_tag("Search") %>
+ <span> <%= label_tag(:id, "User ID:") %>
+  <%= text_field_tag(:id) %>
+<%= button_tag(type: "submit", class: "btn btn-primary") do %>
+    Qualify Site <i class="icon-repeat"></i>
+<% end %>
+</span>
 <% end %>
 </center>
+</div>
 
 <br>
 
 <div>
 <%if @params %>
 <center>
-<h1> Results </h1>
+<h2> Results </h2>
 <% session[:response].each do |site|  %>
-	
-	Site Address: <%= site[1]['url'] %> <br>
-	User System: <%= site[1]["user_system"] %> <br>
-	<% if site[1]['analytics'] %>
-	Anayltics Used:
-	 <%= site[1]['analytics'].join(", ") %>	 	
-	<%end%>  <br>
-	Site Fit: <%= site[1]['fit'] %> <br>
+<div>
+  <br>
+	Site Address: <a href=<%=(site[1]['url'])%>><%=(site[1]['url'])%></a>
+  <%if site[1]['site_status'] != "OK" %>
+  <br> Site Status: Site does not respond <br>
+  <%else%>
+  <br> User System: <%= site[1]["user_system"] %>
+  <%if site[1]['built_with']%>
+  <br> Built With: <%= site[1]['built_with'] %>
+  <%end%>
+	<% if site[1]['analytics'].any? %>
+	<br> Anayltics Used: <%= site[1]['analytics'].join(", ") %>
 	<%end%>
+	<br> Site Fit: <%= site[1]['fit'] %> <br>
+	<%end%>
+  </div>
+  <%end%>
 </center>
-<%end%> 
+<%end%>
 </div>

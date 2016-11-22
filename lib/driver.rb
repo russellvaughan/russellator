@@ -1,20 +1,25 @@
 require 'mysql'
+require 'date'
+require 'httparty'
 
 class Driver
 
 attr_reader :sites
 
-def initialize(url)
-@url = url
+def initialize(id)
+@id = id
 @sites = []
 end
 
 def find_sites
-con = Mysql.new ENV["MYSQL_SERVER"], ENV["MYSQL_USER"], ENV["MYSQL_CREDS"], ENV["MYSQL_DB"]
-rs = con.query("select s.url from users u join sites s on (u.id = s.owner_id) where u.id = #{@url} order by u.id desc limit 10;")
-n_rows = rs.num_rows
-n_rows.times do
-@sites << rs.fetch_row.join("\s")
+secret = ENV["HQ_SECRET"]
+url = "/users/#{@id}/sites?timestamp=#{DateTime.now.strftime('%Q')}&key=#{ENV["HQ_KEY"]}"
+digest = OpenSSL::Digest.new('sha1')
+hmac = OpenSSL::HMAC.hexdigest(digest, secret, url)
+temp_url="#{ENV["HQ_HOST_URL"]}#{url}&sign=#{hmac}"
+response = HTTParty.get(temp_url)
+response.parsed_response.each do |x|
+@sites << x['url']
 end
 @sites
 end

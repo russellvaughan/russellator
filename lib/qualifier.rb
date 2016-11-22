@@ -34,7 +34,7 @@ puts "this is the site #{site}"
 @site = instance_variable_set("@site_#{@num}", Hash.new)
 begin
   response = HTTParty.get(site)
-rescue SocketError, Timeout::Error, Errno::EINVAL, Errno::ECONNRESET, EOFError,
+rescue SocketError, Timeout::Error, Errno::EINVAL, Errno::ECONNRESET, EOFError, Errno::ECONNREFUSED,
       Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError, Net::ProtocolError, Errno::ETIMEDOUT => error
   puts "site"
   @site['url']=site

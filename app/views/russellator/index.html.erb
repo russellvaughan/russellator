@@ -31,7 +31,7 @@
   <%if site[1]['site_status'] != "OK" %>
   <br> Site Status: Site does not respond <br>
   <%else%>
-  <br> User System: <%= site[1]["user_system"].capitalize %>
+  <br> User System: <%= site[1]["user_system"].to_s.capitalize %>
   <%if site[1]['built_with']%>
   <br> Built With: <%= site[1]['built_with'] %>
   <%end%>

@@ -27,7 +27,7 @@
 <% session[:response].each do |site|  %>
 <div>
   <br>
-	Site Address: <a href=<%=(site[1]['url'])%>><%=(site[1]['url'])%></a>
+	Site Address: <a href=<%=(site[1]['url'])%>><%=(site[1]['url'])% target="_blank"></a>
   <%if site[1]['site_status'] != "OK" %>
   <br> Site Status: Site does not respond <br>
   <%else%>

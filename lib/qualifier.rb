@@ -33,7 +33,7 @@ def qualify_user_sites
 begin
   response = HTTParty.get(@user_sites[num])
 rescue SocketError, Timeout::Error, Errno::EINVAL, Errno::ECONNRESET, EOFError, Errno::ECONNREFUSED,
-      Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError, Net::ProtocolError, Errno::ETIMEDOUT, URI::InvalidURIError => error
+      Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError, Net::ProtocolError, Errno::ETIMEDOUT => error
   @site['url']=@user_sites[num]
   puts "Site does not load: #{error}"
   @site['site_status']=error
@@ -43,8 +43,10 @@ end
    if response
     @site['url']=@user_sites[num]
     @site['site_status']=response.message
+    if @site['site_status'] == "OK"
     qualify_page(@user_sites[num])
     @qualification["site_#{@num}"]= @site
+  end
    puts @qualification
    end
 

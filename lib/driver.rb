@@ -24,7 +24,6 @@ begin
 rescue TypeError
 puts 'id does not exist'
 end
-
 end
 @sites
 end

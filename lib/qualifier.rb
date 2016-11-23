@@ -44,7 +44,7 @@ class Qualifier
       if response
         @site['url']=@user_sites[num]
         @site['site_status']=response.message
-       qualify_page(@user_sites[num]) if response.headers['content-type'].include?('html')
+        qualify_page(@user_sites[num]) if response.headers['content-type'].include?('html')
         @qualification["site_#{@num}"]= @site
         puts @qualification
     end

@@ -19,7 +19,12 @@ hmac = OpenSSL::HMAC.hexdigest(digest, secret, url)
 temp_url="#{ENV["HQ_HOST_URL"]}#{url}&sign=#{hmac}"
 response = HTTParty.get(temp_url)
 response.parsed_response.each do |x|
-@sites << x['url']
+begin
+  @sites << x['url']
+rescue TypeError
+puts 'id does not exist'
+end
+
 end
 @sites
 end

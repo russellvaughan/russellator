@@ -33,7 +33,7 @@ class Qualifier
       begin
         response = HTTParty.get(@user_sites[num])
       rescue SocketError, Timeout::Error, Errno::EINVAL, Errno::ECONNRESET, EOFError, Errno::ECONNREFUSED,
-        Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError, Net::ProtocolError, Errno::ETIMEDOUT, URI::InvalidURIError => error
+        Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError, Net::ProtocolError, Errno::ETIMEDOUT, URI::InvalidURIError, OpenSSL::SSL::SSLError => error
         @site['url']=@user_sites[num]
         puts "Site does not load: #{error}"
         @site['site_status']=error

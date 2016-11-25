@@ -1,4 +1,3 @@
-require 'mysql'
 require 'date'
 require 'httparty'
 

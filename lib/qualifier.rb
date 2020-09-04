@@ -4,7 +4,7 @@ class Qualifier
 
   attr_reader :qualification
 
-  USER_SYSTEM = %w(sign\ in log\ in LOGIN log_in Login sign\ up register Sign\ In Sign\ Up Log\ in Sign\ in Log\ In)
+  USER_SYSTEM = %w(sign\ in log\ in LOGIN log_in Login sign\ up register Sign\ In Sign\ Up Log\ in Sign\ in Log\ In signup)
 
   def initialize(website)
     @website = website
